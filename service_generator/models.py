@@ -2,14 +2,14 @@ from django.db import models
 
 class Service_Type(models.Model):
     name = models.CharField(max_length=200)
-    description = models.TextField(blank=True)
+    description = models.TextField(blank=True, null=True)
 
     def __str__(self):
         return self.name
 
 class Prayer(models.Model):
     name = models.CharField(max_length=200)
-    description = models.TextField(blank=True)
+    description = models.TextField(blank=True, null=True)
     included_services = models.ManyToManyField(Service_Type, through="Prayer_Position")
 
     def __str__(self):
@@ -25,7 +25,7 @@ class Song(models.Model):
     prayer = models.ForeignKey(Prayer, on_delete=models.CASCADE)
     title = models.CharField(max_length=200)
     artist = models.CharField(max_length=100)
-    release_year = models.PositiveSmallIntegerField(blank=True)
+    release_year = models.PositiveSmallIntegerField(blank=True, null=True)
     chordsheet = models.FileField(upload_to="chordsheets/")
     # TODO: Ensure chordsheet file
 
