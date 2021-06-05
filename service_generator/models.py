@@ -1,16 +1,16 @@
 from django.db import models
 
-class Service_Type(models.Model):
+class Prayer(models.Model):
     name = models.CharField(max_length=200)
     description = models.TextField(blank=True, null=True)
 
     def __str__(self):
         return self.name
 
-class Prayer(models.Model):
+class Service_Type(models.Model):
     name = models.CharField(max_length=200)
     description = models.TextField(blank=True, null=True)
-    included_services = models.ManyToManyField(Service_Type, through="Prayer_Position")
+    prayers = models.ManyToManyField(Prayer, through="Prayer_Position")
 
     def __str__(self):
         return self.name
