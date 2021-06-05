@@ -12,14 +12,26 @@
             <fieldset>
                 <legend>Search by:</legend>
 
-                <input type="checkbox" name="filter_by_title" id="by_title">
-                <label for="by_title">Title</label>
+                <input type="checkbox" name="filter_by_title" id="filter-by-title">
+                <label for="filter-by-title">Title</label>
 
-                <input type="checkbox" name="filter_by_artist" id="by_artist">
-                <label for="by_artist">Artist</label>
+                <input type="checkbox" name="filter_by_artist" id="filter-by-artist">
+                <label for="filter-by-artist">Artist</label>
 
-                <input type="checkbox" name="filter_by_prayer" id="by_prayer">
-                <label for="by_prayer">Prayer</label>
+                <input type="checkbox" name="filter_by_prayer" id="filter-by-prayer">
+                <label for="filter-by-prayer">Prayer</label>
+            </fieldset>
+            <fieldset>
+                <legend>Order by:</legend>
+
+                <input type="radio" name="order_by" id="order-by-title" value="title" {% if order_by == "title" %}checked{% endif %}>
+                <label for="order-by-title">Title</label>
+
+                <input type="radio" name="order_by" id="order-by-artist" value="artist" {% if order_by == "artist" %}checked{% endif %}>
+                <label for="order-by-artist">Artist</label>
+
+                <input type="radio" name="order_by" id="order-by-prayer" value="prayer" {% if order_by == "prayer" %}checked{% endif %}>
+                <label for="forder-by-prayer">Prayer</label>
             </fieldset>
             <button type="submit">Search</button>
         </form>

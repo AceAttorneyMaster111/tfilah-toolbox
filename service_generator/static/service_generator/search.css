@@ -7,3 +7,17 @@ table {
 th, td {
     border: 1px solid black;
 }
+
+form {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+legend {
+    display: inline;
+}
+
+form * {
+    margin-right: 10px
+}
