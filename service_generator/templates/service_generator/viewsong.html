@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Service Generator | "{{ song.title }}" &mdash; {{ song.artist }}</title>
+        <link rel="stylesheet" type="text/css" href="{% static 'service_generator/viewsong.css' %}">
+        <script>
+            function pdfAlert() {
+                alert("Functionality not yet implemented.");
+            };
+        </script>
+    </head>
+    <body>
+        <div id="main-head">
+            <p><a href="{% url 'service_generator:search' %}">&lt; Go back</a></p>
+            <h2>{{ song.title }}</h2>
+            <h3>{{ song.artist }}</h3>
+            <p>Prayer: <b>{{ song.prayer.name }}</b></p>
+            <form action="{% url 'service_generator:download_chordpro' song.id %}" method="GET">
+                <button type="submit">Download ChordPro</button>
+            </form>
+            <!-- <form action="{% url 'service_generator:download_pdf' song.id %}" method="GET"> -->
+                <!-- <button type="submit"> --><button onclick="pdfAlert();">Download PDF</button>
+            <!-- </form> -->
+        </div>
+        <div id="chordsheet-display">
+            {{ chordsheet_html|safe }}
+        </div>
+    </body>
+</html>

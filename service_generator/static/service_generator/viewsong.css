@@ -1,0 +1,13 @@
+#main-head * {
+    display: inline-block;
+}
+
+#chordsheet-display {
+    border: 1px solid black;
+    padding-left: 10px;
+}
+
+div.chords-lyrics-line {
+    display: flex;
+    font-family: "Roboto Mono", monospace;
+}
