@@ -1,8 +1,12 @@
+import io
+
 from chopro import chopro2html
 
 from django.db.models import Q
 from django.http import FileResponse
 from django.shortcuts import get_object_or_404, render
+
+from weasyprint import HTML, CSS
 
 from .models import Song
 
@@ -38,4 +42,17 @@ def download_chordpro(request, song_id):
     return FileResponse(get_object_or_404(Song, pk=song_id).chordsheet, as_attachment=True)
 
 def download_pdf(request, song_id):
-    pass
+    buffer = io.BytesIO()
+
+    song = get_object_or_404(Song, pk=song_id)
+    song.chordsheet.open("r")
+    chordsheet_html = HTML(string=chopro2html(song.chordsheet.read()))
+    chordsheet_css = CSS(string="div.chords-lyrics-line {\n"
+    "   display: flex;\n"
+    "   font-family: Roboto Mono, monospace;\n"
+    "}\n")
+    song.chordsheet.close()
+
+    chordsheet_html.write_pdf(buffer, stylesheets=[chordsheet_css])
+    buffer.seek(0)
+    return FileResponse(buffer, as_attachment=True, filename=song.title + "_" + song.artist + ".pdf")

@@ -20,9 +20,9 @@
             <form action="{% url 'service_generator:download_chordpro' song.id %}" method="GET">
                 <button type="submit">Download ChordPro</button>
             </form>
-            <!-- <form action="{% url 'service_generator:download_pdf' song.id %}" method="GET"> -->
-                <!-- <button type="submit"> --><button onclick="pdfAlert();">Download PDF</button>
-            <!-- </form> -->
+            <form action="{% url 'service_generator:download_pdf' song.id %}" method="GET">
+                <button type="submit">Download PDF</button>
+            </form>
         </div>
         <div id="chordsheet-display">
             {{ chordsheet_html|safe }}
