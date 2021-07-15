@@ -1,4 +1,10 @@
+import io
+
+from chopro import chopro2html
+
 from django.db import models
+
+from weasyprint import HTML, CSS
 
 class Prayer(models.Model):
     name = models.CharField(max_length=200)
@@ -26,10 +32,29 @@ class Song(models.Model):
     title = models.CharField(max_length=200)
     artist = models.CharField(max_length=100)
     release_year = models.PositiveSmallIntegerField(blank=True, null=True)
-    chordsheet = models.FileField(upload_to="chordsheets/")
     # TODO: Ensure chordsheet file
 
     def __str__(self):
         return f"{self.title} ({self.artist})"
+
+class Chordsheet(models.Model):
+    file = models.FileField(upload_to="chordsheets/")
+    contributor = models.CharField(max_length=100)
+    song = models.OneToOneField(Song, on_delete=models.CASCADE, primary_key=True)
+
+    def get_pdf(self):
+        buffer = io.BytesIO()
+
+        self.file.open("r")
+        chordsheet_html = HTML(string=chopro2html(self.file.read()))
+        chordsheet_css = CSS(string="div.chords-lyrics-line {\n"
+        "   display: flex;\n"
+        "   font-family: Roboto Mono, monospace;\n"
+        "}\n")
+        self.file.close()
+
+        chordsheet_html.write_pdf(buffer, stylesheets=[chordsheet_css])
+        buffer.seek(0)
+        return buffer
 
 # TODO: Create model for Service, for saving services
