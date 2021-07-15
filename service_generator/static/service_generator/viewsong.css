@@ -11,3 +11,7 @@ div.chords-lyrics-line {
     display: flex;
     font-family: "Roboto Mono", monospace;
 }
+
+#chordsheet-contributor {
+    padding-top: 10px;
+}

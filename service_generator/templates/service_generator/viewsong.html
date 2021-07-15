@@ -5,11 +5,6 @@
         <meta charset="utf-8">
         <title>Service Generator | "{{ song.title }}" &mdash; {{ song.artist }}</title>
         <link rel="stylesheet" type="text/css" href="{% static 'service_generator/viewsong.css' %}">
-        <script>
-            function pdfAlert() {
-                alert("Functionality not yet implemented.");
-            };
-        </script>
     </head>
     <body>
         <div id="main-head">
@@ -26,6 +21,9 @@
         </div>
         <div id="chordsheet-display">
             {{ chordsheet_html|safe }}
+        </div>
+        <div id="chordsheet-contributor">
+            <i>Contributed by {{ song.chordsheet.contributor }}</i>
         </div>
     </body>
 </html>

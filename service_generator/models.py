@@ -46,11 +46,17 @@ class Chordsheet(models.Model):
         buffer = io.BytesIO()
 
         self.file.open("r")
-        chordsheet_html = HTML(string=chopro2html(self.file.read()))
-        chordsheet_css = CSS(string="div.chords-lyrics-line {\n"
-        "   display: flex;\n"
-        "   font-family: Roboto Mono, monospace;\n"
-        "}\n")
+        chordsheet_html = HTML(string=chopro2html(self.file.read()) +
+        "<div id=chordsheet-contributor>"
+            "<i>Contributed by " + self.contributor +
+        "</div>")
+        chordsheet_css = CSS(string="div.chords-lyrics-line {"
+        "   display: flex;"
+        "   font-family: Roboto Mono, monospace;"
+        "}"
+        "#chordsheet-contributor {"
+            "padding-top: 10px;"
+        "}")
         self.file.close()
 
         chordsheet_html.write_pdf(buffer, stylesheets=[chordsheet_css])
