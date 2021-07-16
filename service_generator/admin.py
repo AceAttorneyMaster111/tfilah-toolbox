@@ -1,8 +1,8 @@
 from django.contrib import admin
 
-from .models import Chordsheet, Prayer, Prayer_Position, Service_Type, Song
+from .models import Chordsheet, Chordsheet_Contributor, Prayer, Prayer_Position, Service_Type, Song
 
-admin.site.register(Prayer)
+admin.site.register([Prayer, Chordsheet_Contributor])
 
 class Prayer_Position_Inline(admin.TabularInline):
     model = Prayer_Position

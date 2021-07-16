@@ -37,9 +37,15 @@ class Song(models.Model):
     def __str__(self):
         return f"{self.title} ({self.artist})"
 
+class Chordsheet_Contributor(models.Model):
+    name = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.name
+
 class Chordsheet(models.Model):
     file = models.FileField(upload_to="chordsheets/")
-    contributor = models.CharField(max_length=100)
+    contributors = models.ManyToManyField(Chordsheet_Contributor)
     song = models.OneToOneField(Song, on_delete=models.CASCADE, primary_key=True)
 
     def get_pdf(self):
@@ -48,7 +54,7 @@ class Chordsheet(models.Model):
         self.file.open("r")
         chordsheet_html = HTML(string=chopro2html(self.file.read()) +
         "<div id=chordsheet-contributor>"
-            "<i>Contributed by " + self.contributor +
+            "<i>Contributed by " + self.list_contributors() +
         "</div>")
         chordsheet_css = CSS(string="div.chords-lyrics-line {"
         "   display: flex;"
@@ -62,5 +68,15 @@ class Chordsheet(models.Model):
         chordsheet_html.write_pdf(buffer, stylesheets=[chordsheet_css])
         buffer.seek(0)
         return buffer
+    
+    @property
+    def list_contributors(self):
+        contributors = self.contributors.all()
+        if len(contributors) == 1:
+            return contributors[0]
+        if len(contributors) == 2:
+            return contributors[0] + " and " + contributors[1]
+        contributors[-1] = "and " + contributors[-1]
+        return ", ".join(contributors)
 
 # TODO: Create model for Service, for saving services
