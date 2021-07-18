@@ -54,14 +54,18 @@ class Chordsheet(models.Model):
         self.file.open("r")
         chordsheet_html = HTML(string=chopro2html(self.file.read()) +
         "<div id=chordsheet-contributor>"
-            "<i>Contributed by " + self.list_contributors() +
+            "<i>Contributed by " + str(self.list_contributors) +
         "</div>")
         chordsheet_css = CSS(string="div.chords-lyrics-line {"
         "   display: flex;"
         "   font-family: Roboto Mono, monospace;"
         "}"
         "#chordsheet-contributor {"
-            "padding-top: 10px;"
+        "   padding-top: 10px;"
+        "}"
+        "div.chords:empty::before {"
+        "   content: ' ';"
+        "   white-space: pre;"
         "}")
         self.file.close()
 

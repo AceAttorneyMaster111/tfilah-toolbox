@@ -15,3 +15,8 @@ div.chords-lyrics-line {
 #chordsheet-contributor {
     padding-top: 10px;
 }
+
+div.chords:empty::before {
+    content: " ";
+    white-space: pre;
+}
