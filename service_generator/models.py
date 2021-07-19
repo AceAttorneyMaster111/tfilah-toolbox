@@ -31,7 +31,7 @@ class Artist(models.Model):
     name = models.CharField(max_length=200)
 
     def __str__(self):
-        return self.name
+        return self.name if self.name != "Unknown" else f"Unknown (ID {self.id})"
 
 class Song(models.Model):
     prayer = models.ForeignKey(Prayer, on_delete=models.CASCADE)

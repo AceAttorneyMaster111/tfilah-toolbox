@@ -17,8 +17,10 @@ The Service Generator is a tool that pulls from a database of liturgical music a
 * Compile chordsheets together into a printable chord packet
 * Make a worship service by choosing songs in liturgical order
 * Generate cue sheets for a service
+* View data about prayers, artists, and service types
 * More?
 
 ## Other Tools
 
-* No ideas yet, if you have some, please contact me!
+* Free, open source siddur?
+* If you have more ideas, please contact me!
