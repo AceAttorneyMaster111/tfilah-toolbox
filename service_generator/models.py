@@ -27,10 +27,16 @@ class Prayer_Position(models.Model):
     index = models.PositiveSmallIntegerField(unique=True)
     # TODO: Deal with the fact that this is ordered
 
+class Artist(models.Model):
+    name = models.TextField(max_length=200)
+
+    def __str__(self):
+        return self.name
+
 class Song(models.Model):
     prayer = models.ForeignKey(Prayer, on_delete=models.CASCADE)
     title = models.CharField(max_length=200)
-    artist = models.CharField(max_length=100)
+    artist = models.ForeignKey(Artist, on_delete=models.CASCADE, null=True)
     release_year = models.PositiveSmallIntegerField(blank=True, null=True)
     # TODO: Ensure chordsheet file
 
