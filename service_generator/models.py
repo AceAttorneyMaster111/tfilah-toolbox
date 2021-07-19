@@ -28,7 +28,7 @@ class Prayer_Position(models.Model):
     # TODO: Deal with the fact that this is ordered
 
 class Artist(models.Model):
-    name = models.TextField(max_length=200)
+    name = models.CharField(max_length=200)
 
     def __str__(self):
         return self.name
