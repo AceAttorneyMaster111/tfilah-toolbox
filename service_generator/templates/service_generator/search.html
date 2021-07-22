@@ -4,50 +4,55 @@
     <head>
         <meta charset="utf-8">
         <link rel="stylesheet" type="text/css" href="{% static 'service_generator/search.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'service_generator/style.css' %}">
         <title>Service Generator | Search</title>
     </head>
     <body>
-        <form action="{% url 'service_generator:filter' %}" method="GET">
-            <input type="text" name="filter_text" value="{{ filter_text }}">
-            <fieldset>
-                <legend>Search by:</legend>
+        {% include "service_generator/header.html" %}
+        <main>
+            <form action="{% url 'service_generator:filter' %}" method="GET">
+                <input type="text" name="filter_text" value="{{ filter_text }}">
+                <fieldset>
+                    <legend>Search by:</legend>
 
-                <input type="checkbox" name="filter_by_title" id="filter-by-title">
-                <label for="filter-by-title">Title</label>
+                    <input type="checkbox" name="filter_by_title" id="filter-by-title">
+                    <label for="filter-by-title">Title</label>
 
-                <input type="checkbox" name="filter_by_artist" id="filter-by-artist">
-                <label for="filter-by-artist">Artist</label>
+                    <input type="checkbox" name="filter_by_artist" id="filter-by-artist">
+                    <label for="filter-by-artist">Artist</label>
 
-                <input type="checkbox" name="filter_by_prayer" id="filter-by-prayer">
-                <label for="filter-by-prayer">Prayer</label>
-            </fieldset>
-            <fieldset>
-                <legend>Order by:</legend>
+                    <input type="checkbox" name="filter_by_prayer" id="filter-by-prayer">
+                    <label for="filter-by-prayer">Prayer</label>
+                </fieldset>
+                <fieldset>
+                    <legend>Order by:</legend>
 
-                <input type="radio" name="order_by" id="order-by-title" value="title" {% if order_by == "title" %}checked{% endif %}>
-                <label for="order-by-title">Title</label>
+                    <input type="radio" name="order_by" id="order-by-title" value="title" {% if order_by == "title" %}checked{% endif %}>
+                    <label for="order-by-title">Title</label>
 
-                <input type="radio" name="order_by" id="order-by-artist" value="artist" {% if order_by == "artist" %}checked{% endif %}>
-                <label for="order-by-artist">Artist</label>
+                    <input type="radio" name="order_by" id="order-by-artist" value="artist" {% if order_by == "artist" %}checked{% endif %}>
+                    <label for="order-by-artist">Artist</label>
 
-                <input type="radio" name="order_by" id="order-by-prayer" value="prayer" {% if order_by == "prayer" %}checked{% endif %}>
-                <label for="forder-by-prayer">Prayer</label>
-            </fieldset>
-            <button type="submit">Search</button>
-        </form>
-        <table>
-            <tr>
-                <th>Song Title</th>
-                <th>Artist</th>
-                <th>Prayer</th>
-            </tr>
-            {% for song in song_list %}
+                    <input type="radio" name="order_by" id="order-by-prayer" value="prayer" {% if order_by == "prayer" %}checked{% endif %}>
+                    <label for="forder-by-prayer">Prayer</label>
+                </fieldset>
+                <button type="submit">Search</button>
+            </form>
+            <table>
                 <tr>
-                    <td><a href="{% url 'service_generator:viewsong' song.id %}">{{ song.title }}</a></td>
-                    <td>{{ song.artist.name }}</td>
-                    <td>{{ song.prayer.name }}</td>
+                    <th>Song Title</th>
+                    <th>Artist</th>
+                    <th>Prayer</th>
                 </tr>
-            {% endfor %}
-        </table>
+                {% for song in song_list %}
+                    <tr>
+                        <td><a href="{% url 'service_generator:viewsong' song.id %}">{{ song.title }}</a></td>
+                        <td>{{ song.artist.name }}</td>
+                        <td>{{ song.prayer.name }}</td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </main>
+        {% include "service_generator/footer.html" %}
     </body>
 </html>
