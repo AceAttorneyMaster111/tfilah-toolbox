@@ -18,6 +18,7 @@ The Service Generator is a tool that pulls from a database of liturgical music a
 * Make a worship service by choosing songs in liturgical order
 * Generate cue sheets for a service
 * View data about prayers, artists, and service types
+* Visual T'filah Creator
 * More?
 
 ## Other Tools
