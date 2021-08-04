@@ -26,3 +26,9 @@ The Service Generator is a tool that pulls from a database of liturgical music a
 * Free, open source siddur?
 * Songbook creator
 * If you have more ideas, please contact me!
+
+## Thank Yous
+* The Key School, for making this project possible
+* Michael Wagner, for programming help and general guidance
+* Jesse Herrnson and Rabbi Kari Tuling, for ideas
+* Rabbi Dan Medwin, for advice and encouragement
