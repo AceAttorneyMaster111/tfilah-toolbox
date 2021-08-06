@@ -47,8 +47,8 @@
                 {% for song in song_list %}
                     <tr>
                         <td><a href="{% url 'service_generator:viewsong' song.id %}">{{ song.title }}</a></td>
-                        <td>{{ song.artist.name }}</td>
-                        <td>{{ song.prayer.name }}</td>
+                        <td><a href="{% url 'service_generator:viewartist' song.artist.id %}">{{ song.artist.name }}</a></td>
+                        <td><a href="{% url 'service_generator:viewprayer' song.prayer.id %}">{{ song.prayer.name }}</a></td>
                     </tr>
                 {% endfor %}
             </table>
