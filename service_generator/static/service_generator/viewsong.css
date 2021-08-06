@@ -20,3 +20,7 @@ div.chords:empty::before {
     content: " ";
     white-space: pre;
 }
+
+div:not(.chord-lyric-block) > div.lyrics {
+    white-space: initial;
+}
