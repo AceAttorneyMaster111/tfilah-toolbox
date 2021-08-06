@@ -4,7 +4,7 @@ from django.db.models import Q
 from django.http import FileResponse
 from django.shortcuts import get_object_or_404, render
 
-from .models import Song
+from .models import Artist, Prayer, Song
 
 def search(request):
     return render(request, "service_generator/search.html", {"song_list": Song.objects.all, "filter_text": "", "order_by": "title"})
@@ -39,4 +39,12 @@ def download_chordpro(request, song_id):
 
 def download_pdf(request, song_id):
     song = get_object_or_404(Song, pk=song_id)
-    return FileResponse(song.chordsheet.get_pdf(), as_attachment=True, filename=song.title + "_" + song.artist + ".pdf")
+    return FileResponse(song.chordsheet.get_pdf(), as_attachment=True, filename=song.title + "_" + song.artist.name + ".pdf")
+
+def viewartist(request, artist_id):
+    artist = get_object_or_404(Artist, pk=artist_id)
+    return render(request, "service_generator/viewartist.html", {"artist": artist})
+
+def viewprayer(request, prayer_id):
+    prayer = get_object_or_404(Prayer, pk=prayer_id)
+    return render(request, "service_generator/viewprayer.html", {"prayer": prayer})
