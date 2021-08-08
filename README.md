@@ -8,7 +8,7 @@ The Service Generator is a tool that pulls from a database of liturgical music a
 ### Current functionality:
 
 * Admin site: Upload new chordsheets, add new songs and prayers and services
-* Search and filter songs by title, artist, and prayer
+* Search and order songs by title, artist, and prayer
 * View chordsheet and other data associated with each song
 * Download the ChordPro and PDF versions of the chordsheet
 
