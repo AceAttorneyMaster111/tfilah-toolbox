@@ -6,7 +6,7 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('service_generator', '0011_rename_temp_artist_song_artist'),
+        ('hashirim_shelanu', '0011_rename_temp_artist_song_artist'),
     ]
 
     operations = [

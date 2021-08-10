@@ -2,7 +2,7 @@ from django.urls import path
 
 from . import views
 
-app_name = "service_generator"
+app_name = "hashirim_shelanu"
 urlpatterns = [
     path("", views.search, name="search"),
     path("filter/", views.filter, name="filter"),

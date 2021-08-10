@@ -3,14 +3,14 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <link rel="stylesheet" type="text/css" href="{% static 'service_generator/search.css' %}">
-        <link rel="stylesheet" type="text/css" href="{% static 'service_generator/style.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'hashirim_shelanu/search.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'hashirim_shelanu/style.css' %}">
         <title>Service Generator | Search</title>
     </head>
     <body>
-        {% include "service_generator/header.html" %}
+        {% include "hashirim_shelanu/header.html" %}
         <main>
-            <form action="{% url 'service_generator:filter' %}" method="GET">
+            <form action="{% url 'hashirim_shelanu:filter' %}" method="GET">
                 <input type="text" name="filter_text" value="{{ filter_text }}">
                 <fieldset>
                     <legend>Search by:</legend>
@@ -46,13 +46,13 @@
                 </tr>
                 {% for song in song_list %}
                     <tr>
-                        <td><a href="{% url 'service_generator:viewsong' song.id %}">{{ song.title }}</a></td>
-                        <td><a href="{% url 'service_generator:viewartist' song.artist.id %}">{{ song.artist.name }}</a></td>
-                        <td><a href="{% url 'service_generator:viewprayer' song.prayer.id %}">{{ song.prayer.name }}</a></td>
+                        <td><a href="{% url 'hashirim_shelanu:viewsong' song.id %}">{{ song.title }}</a></td>
+                        <td><a href="{% url 'hashirim_shelanu:viewartist' song.artist.id %}">{{ song.artist.name }}</a></td>
+                        <td><a href="{% url 'hashirim_shelanu:viewprayer' song.prayer.id %}">{{ song.prayer.name }}</a></td>
                     </tr>
                 {% endfor %}
             </table>
         </main>
-        {% include "service_generator/footer.html" %}
+        {% include "hashirim_shelanu/footer.html" %}
     </body>
 </html>

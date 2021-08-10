@@ -6,7 +6,7 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('service_generator', '0007_auto_20210715_1625'),
+        ('hashirim_shelanu', '0007_auto_20210715_1625'),
     ]
 
     operations = [
@@ -24,6 +24,6 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='chordsheet',
             name='contributors',
-            field=models.ManyToManyField(to='service_generator.Chordsheet_Contributor'),
+            field=models.ManyToManyField(to='hashirim_shelanu.Chordsheet_Contributor'),
         ),
     ]

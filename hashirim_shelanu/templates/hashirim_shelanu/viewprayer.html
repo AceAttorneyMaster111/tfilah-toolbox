@@ -4,14 +4,14 @@
     <head>
         <meta charset="utf-8">
         <title>Service Generator | {{ prayer.name }}</title>
-        <link rel="stylesheet" type="text/css" href="{% static 'service_generator/style.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'hashirim_shelanu/style.css' %}">
     </head>
     <body>
-        {% include "service_generator/header.html" %}
+        {% include "hashirim_shelanu/header.html" %}
         <main>
             <h1>{{ prayer.name }}</h1>
             <p>{{ prayer.description }}</p>
         </main>
-        {% include "service_generator/footer.html" %}
+        {% include "hashirim_shelanu/footer.html" %}
     </body>
 </html>

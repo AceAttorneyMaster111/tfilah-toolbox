@@ -25,7 +25,7 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('index', models.PositiveSmallIntegerField(unique=True)),
-                ('prayer', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='service_generator.prayer')),
+                ('prayer', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='hashirim_shelanu.prayer')),
             ],
         ),
         migrations.CreateModel(
@@ -34,7 +34,7 @@ class Migration(migrations.Migration):
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('title', models.CharField(max_length=200)),
                 ('artist', models.CharField(max_length=100)),
-                ('prayer', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='service_generator.prayer')),
+                ('prayer', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='hashirim_shelanu.prayer')),
             ],
         ),
         migrations.CreateModel(
@@ -43,12 +43,12 @@ class Migration(migrations.Migration):
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('name', models.CharField(max_length=200)),
                 ('description', models.CharField(max_length=4000)),
-                ('prayers', models.ManyToManyField(through='service_generator.Prayer_Position', to='service_generator.Prayer')),
+                ('prayers', models.ManyToManyField(through='hashirim_shelanu.Prayer_Position', to='hashirim_shelanu.Prayer')),
             ],
         ),
         migrations.AddField(
             model_name='prayer_position',
             name='service_type',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='service_generator.service_type'),
+            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='hashirim_shelanu.service_type'),
         ),
     ]

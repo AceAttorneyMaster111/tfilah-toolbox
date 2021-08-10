@@ -4,21 +4,21 @@
     <head>
         <meta charset="utf-8">
         <title>Service Generator | "{{ song.title }}" &mdash; {{ song.artist.name }}</title>
-        <link rel="stylesheet" type="text/css" href="{% static 'service_generator/viewsong.css' %}">
-        <link rel="stylesheet" type="text/css" href="{% static 'service_generator/style.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'hashirim_shelanu/viewsong.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'hashirim_shelanu/style.css' %}">
     </head>
     <body>
-        {% include "service_generator/header.html" %}
+        {% include "hashirim_shelanu/header.html" %}
         <main>
             <div id="main-head">
-                <p><a href="{% url 'service_generator:search' %}">&lt; Go back</a></p>
+                <p><a href="{% url 'hashirim_shelanu:search' %}">&lt; Go back</a></p>
                 <h2>{{ song.title }}</h2>
                 <h3>{{ song.artist }}</h3>
                 <p>Prayer: <b>{{ song.prayer.name }}</b></p>
-                <form action="{% url 'service_generator:download_chordpro' song.id %}" method="GET">
+                <form action="{% url 'hashirim_shelanu:download_chordpro' song.id %}" method="GET">
                     <button type="submit">Download ChordPro</button>
                 </form>
-                <form action="{% url 'service_generator:download_pdf' song.id %}" method="GET">
+                <form action="{% url 'hashirim_shelanu:download_pdf' song.id %}" method="GET">
                     <button type="submit">Download PDF</button>
                 </form>
             </div>
@@ -29,6 +29,6 @@
                 <i>Contributed by {{ song.chordsheet.list_contributors }}</i>
             </div>
         </main>
-        {% include "service_generator/footer.html" %}
+        {% include "hashirim_shelanu/footer.html" %}
     </body>
 </html>

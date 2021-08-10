@@ -5,8 +5,8 @@ import django.db.models.deletion
 
 
 def temp_artist_gen(apps, schema_editor):
-    Artist = apps.get_model("service_generator", "Artist")
-    Song = apps.get_model("service_generator", "Song")
+    Artist = apps.get_model("hashirim_shelanu", "Artist")
+    Song = apps.get_model("hashirim_shelanu", "Song")
 
     for song in Song.objects.all():
         artist, created = Artist.objects.get_or_create(name=song.artist)
@@ -16,7 +16,7 @@ def temp_artist_gen(apps, schema_editor):
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('service_generator', '0008_auto_20210716_1430'),
+        ('hashirim_shelanu', '0008_auto_20210716_1430'),
     ]
 
     operations = [
@@ -30,7 +30,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='song',
             name='temp_artist',
-            field=models.ForeignKey(null=True, on_delete=django.db.models.deletion.CASCADE, to='service_generator.artist'),
+            field=models.ForeignKey(null=True, on_delete=django.db.models.deletion.CASCADE, to='hashirim_shelanu.artist'),
         ),
         migrations.RunPython(temp_artist_gen)
     ]

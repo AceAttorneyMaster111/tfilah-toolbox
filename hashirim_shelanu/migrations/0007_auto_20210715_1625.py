@@ -7,7 +7,7 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('service_generator', '0006_auto_20210605_1730'),
+        ('hashirim_shelanu', '0006_auto_20210605_1730'),
     ]
 
     operations = [
@@ -16,7 +16,7 @@ class Migration(migrations.Migration):
             fields=[
                 ('file', models.FileField(upload_to='chordsheets/')),
                 ('contributor', models.CharField(max_length=100)),
-                ('song', models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, primary_key=True, serialize=False, to='service_generator.song')),
+                ('song', models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, primary_key=True, serialize=False, to='hashirim_shelanu.song')),
             ],
         ),
         migrations.RemoveField(

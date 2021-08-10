@@ -6,7 +6,7 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('service_generator', '0005_auto_20210603_0102'),
+        ('hashirim_shelanu', '0005_auto_20210603_0102'),
     ]
 
     operations = [
@@ -17,6 +17,6 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='service_type',
             name='prayers',
-            field=models.ManyToManyField(through='service_generator.Prayer_Position', to='service_generator.Prayer'),
+            field=models.ManyToManyField(through='hashirim_shelanu.Prayer_Position', to='hashirim_shelanu.Prayer'),
         ),
     ]
