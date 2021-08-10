@@ -16,14 +16,14 @@ class Prayer(models.Model):
 class Service_Type(models.Model):
     name = models.CharField(max_length=200)
     description = models.TextField(blank=True, null=True)
-    prayers = models.ManyToManyField(Prayer, through="Prayer_Position")
+    prayers = models.ManyToManyField(Prayer, through="Prayer_Position", related_name="+")
 
     def __str__(self):
         return self.name
 
 class Prayer_Position(models.Model):
-    prayer = models.ForeignKey(Prayer, on_delete=models.CASCADE)
-    service_type = models.ForeignKey(Service_Type, on_delete=models.CASCADE)
+    prayer = models.ForeignKey(Prayer, on_delete=models.CASCADE, related_name="+")
+    service_type = models.ForeignKey(Service_Type, on_delete=models.CASCADE, related_name="+")
     index = models.PositiveSmallIntegerField(unique=True)
     # TODO: Deal with the fact that this is ordered
 
