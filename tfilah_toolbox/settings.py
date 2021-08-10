@@ -33,7 +33,7 @@ ALLOWED_HOSTS = ["*"]
 # Application definition
 
 INSTALLED_APPS = [
-    'hashirim_shelanu.apps.ServiceGeneratorConfig',
+    'hashirim_shelanu.apps.HashirimShelanuConfig',
     'utils.apps.UtilsConfig',
     'django.contrib.admin',
     'django.contrib.auth',
