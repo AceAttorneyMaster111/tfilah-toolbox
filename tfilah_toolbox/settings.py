@@ -34,6 +34,7 @@ ALLOWED_HOSTS = ["*"]
 
 INSTALLED_APPS = [
     'hashirim_shelanu.apps.HashirimShelanuConfig',
+    'service_generator.apps.ServiceGeneratorConfig',
     'utils.apps.UtilsConfig',
     'django.contrib.admin',
     'django.contrib.auth',
