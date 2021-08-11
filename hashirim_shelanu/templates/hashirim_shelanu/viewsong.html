@@ -5,10 +5,10 @@
         <meta charset="utf-8">
         <title>Service Generator | "{{ song.title }}" &mdash; {{ song.artist.name }}</title>
         <link rel="stylesheet" type="text/css" href="{% static 'hashirim_shelanu/viewsong.css' %}">
-        <link rel="stylesheet" type="text/css" href="{% static 'hashirim_shelanu/style.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'tfilah_toolbox/style.css' %}">
     </head>
     <body>
-        {% include "hashirim_shelanu/header.html" %}
+        {% include "tfilah_toolbox/header.html" %}
         <main>
             <div id="main-head">
                 <p><a href="{% url 'hashirim_shelanu:search' %}">&lt; Go back</a></p>
@@ -29,6 +29,6 @@
                 <i>Contributed by {{ song.chordsheet.list_contributors }}</i>
             </div>
         </main>
-        {% include "hashirim_shelanu/footer.html" %}
+        {% include "tfilah_toolbox/footer.html" %}
     </body>
 </html>
