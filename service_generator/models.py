@@ -1,6 +1,7 @@
 from django.contrib.contenttypes.fields import GenericForeignKey
 from django.contrib.contenttypes.models import ContentType
 from django.db import models
+from django.db.models.constraints import Deferrable, UniqueConstraint
 
 from hashirim_shelanu.models import Prayer, Song
 
@@ -18,7 +19,14 @@ class Prayer_Position(models.Model):
     prayer = models.ForeignKey(Prayer, on_delete=models.CASCADE)
     service_type = models.ForeignKey(Service_Type, on_delete=models.CASCADE)
     index = models.PositiveSmallIntegerField(unique=True)
-    # TODO: Deal with the fact that this is ordered
+    class Meta:
+        ordering = ["index"]
+        # TODO: Switch to PostgreSQL, which supports this
+        # constraints = [UniqueConstraint(
+        #     name="prayer_unique_index",
+        #     fields=["index"],
+        #     deferrable=Deferrable.DEFERRED
+        # )]
 
 class Service_Element(models.Model):
     class Element_Types(models.IntegerChoices):
@@ -50,18 +58,32 @@ class Element_Position(models.Model):
     service = models.ForeignKey(Service, on_delete=models.CASCADE)
     index = models.PositiveSmallIntegerField(unique=True)
 
+    class Meta:
+        ordering = ["index"]
+        # constraints = [UniqueConstraint(
+        #     name="element_unique_index",
+        #     fields=["index"],
+        #     deferrable=Deferrable.DEFERRED
+        # )]
 
-class Song_Element(models.Model):
-    song = models.OneToOneField(Song, on_delete=models.CASCADE)
 
-class Prayer_Element(models.Model):
-    prayer = models.OneToOneField(Prayer, on_delete=models.CASCADE)
+class Generic_Element(models.Model):
+    class Meta:
+        abstract = True
 
-class Reading_Element(models.Model):
+class Song_Element(Generic_Element, Song):
+    class Meta(Generic_Element.Meta):
+        proxy = True
+
+class Prayer_Element(Generic_Element, Prayer):
+    class Meta(Generic_Element.Meta):
+        proxy = True
+
+class Reading_Element(Generic_Element):
     pass
 
-class Iyun_Element(models.Model):
+class Iyun_Element(Generic_Element):
     pass
 
-class Other_Element(models.Model):
+class Other_Element(Generic_Element):
     pass
