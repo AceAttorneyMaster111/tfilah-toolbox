@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 from . import secrets
 
@@ -59,7 +60,7 @@ ROOT_URLCONF = 'tfilah_toolbox.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(secrets.ROOT_PATH, "tfilah_toolbox/templates")],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
