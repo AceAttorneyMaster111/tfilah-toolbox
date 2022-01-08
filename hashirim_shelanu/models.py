@@ -1,9 +1,7 @@
 import io
 
 from chopro import chopro2html
-
 from django.db import models
-
 from weasyprint import HTML, CSS
 
 class Prayer(models.Model):
@@ -74,5 +72,3 @@ class Chordsheet(models.Model):
             return contributors[0] + " and " + contributors[1]
         contributors[-1] = "and " + contributors[-1]
         return ", ".join(contributors)
-
-# TODO: Create model for Service, for saving services
