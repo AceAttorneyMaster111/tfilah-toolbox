@@ -15,13 +15,13 @@
                 <fieldset>
                     <legend>Search by:</legend>
 
-                    <input type="checkbox" name="filter_by_title" id="filter-by-title">
+                    <input type="checkbox" name="filter_by_title" id="filter-by-title" {% if select.title %}checked{% endif %}>
                     <label for="filter-by-title">Title</label>
 
-                    <input type="checkbox" name="filter_by_artist" id="filter-by-artist">
+                    <input type="checkbox" name="filter_by_artist" id="filter-by-artist" {% if select.artist %}checked{% endif %}>
                     <label for="filter-by-artist">Artist</label>
 
-                    <input type="checkbox" name="filter_by_prayer" id="filter-by-prayer">
+                    <input type="checkbox" name="filter_by_prayer" id="filter-by-prayer" {% if select.prayer %}checked{% endif %}>
                     <label for="filter-by-prayer">Prayer</label>
                 </fieldset>
                 <fieldset>
