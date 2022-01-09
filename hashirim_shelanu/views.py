@@ -25,7 +25,7 @@ def filter(request):
 
     filter_text = request.GET["filter_text"]
     query = ((Q(title__icontains=filter_text) if filter_by["title"] else Q())
-        | (Q(artist__icontains=filter_text) if filter_by["artist"] else Q())
+        | (Q(artist__name__icontains=filter_text) if filter_by["artist"] else Q())
         | (Q(prayer__name__icontains=filter_text) if filter_by["prayer"] else Q())
     )
     song_list = Song.objects.filter(query).order_by(request.GET["order_by"])
