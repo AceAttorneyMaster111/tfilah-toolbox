@@ -52,7 +52,7 @@
                     </tr>
                 {% endfor %}
             </table>
-            {% if len(song_list) == 0 %}
+            {% if not song_list %}
                 <p>No results found.</p>
             {% endif %}
         </main>
