@@ -52,6 +52,9 @@
                     </tr>
                 {% endfor %}
             </table>
+            {% if len(song_list) == 0 %}
+                <p>No results found.</p>
+            {% endif %}
         </main>
         {% include "tfilah_toolbox/footer.html" %}
     </body>
