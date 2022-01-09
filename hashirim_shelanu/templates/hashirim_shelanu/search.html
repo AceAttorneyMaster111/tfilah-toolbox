@@ -11,7 +11,7 @@
         {% include "tfilah_toolbox/header.html" %}
         <main>
             <form action="{% url 'hashirim_shelanu:filter' %}" method="GET">
-                <input type="text" name="filter_text" value="{{ filter_text }}">
+                <input type="text" name="filter_text" placeholder="Search text:" value="{{ filter_text }}">
                 <fieldset>
                     <legend>Search by:</legend>
 
