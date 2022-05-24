@@ -14,6 +14,7 @@ HaShirim Shelanu is a searchable database of liturgical music and chord sheets.
 
 ### Future functionality:
 * View data about prayers and artists
+* Sort by other categories, like tags
 
 ## Service Generator
 The Service Generator is a future tool that uses the HaShirim Shelanu database to create and export services.
