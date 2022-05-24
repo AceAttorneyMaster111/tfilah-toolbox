@@ -15,6 +15,13 @@ HaShirim Shelanu is a searchable database of liturgical music and chord sheets.
 ### Future functionality:
 * View data about prayers and artists
 * Sort by other categories, like tags
+* Accounts to view database
+* Get statistics of how songs are being used/viewed
+* Verified artist accounts
+* Private uploads
+* Contact info/link to website for artists
+* Where to purchase sheet music/listen to audio
+* Users can add tags
 
 ## Service Generator
 The Service Generator is a future tool that uses the HaShirim Shelanu database to create and export services.
@@ -36,5 +43,5 @@ The Service Generator is a future tool that uses the HaShirim Shelanu database t
 ## Thank Yous
 * The Key School, for making this project possible
 * Michael Wagner, for programming help and general guidance
-* Jesse Herrnson and Rabbi Kari Tuling, for ideas
+* Jesse Herrnson, Rabbi Kari Tuling, Michelle Cohn Levy for ideas
 * Rabbi Dan Medwin, for advice and encouragement
