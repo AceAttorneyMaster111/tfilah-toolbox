@@ -13,6 +13,7 @@ class Prayer(models.Model):
 
 class Artist(models.Model):
     name = models.CharField(max_length=200)
+    picture = models.ImageField(upload_to="artists/", blank=True, null=True)
 
     def __str__(self):
         return self.name if self.name != "Unknown" else f"Unknown (ID {self.id})"
