@@ -1,7 +1,7 @@
 from django.contrib.contenttypes.fields import GenericForeignKey
 from django.contrib.contenttypes.models import ContentType
 from django.db import models
-from django.db.models.constraints import Deferrable, UniqueConstraint
+# from django.db.models.constraints import Deferrable, UniqueConstraint
 
 from hashirim_shelanu.models import Prayer, Song
 
@@ -9,7 +9,7 @@ from hashirim_shelanu.models import Prayer, Song
 
 class Service_Type(models.Model):
     name = models.CharField(max_length=200)
-    description = models.TextField(blank=True, null=True)
+    description = models.TextField(blank=True)
     prayers = models.ManyToManyField(Prayer, through="Prayer_Position")
 
     def __str__(self):
@@ -46,10 +46,11 @@ class Service_Element(models.Model):
     element_type = models.ForeignKey(ContentType, on_delete=models.CASCADE, limit_choices_to=Element_Types.get_limit_query())
     object_id = models.PositiveIntegerField()
     object = GenericForeignKey("element_type", "object_id")
+    point = models.CharField(max_length=200)
 
 class Service(models.Model):
     title = models.CharField(max_length=200)
-    description = models.TextField(blank=True, null=True)
+    description = models.TextField(blank=True)
     service_type = models.ForeignKey(Service_Type, on_delete=models.CASCADE)
     element_list = models.ManyToManyField(Service_Element, through="Element_Position")
 
@@ -68,22 +69,47 @@ class Element_Position(models.Model):
 
 
 class Generic_Element(models.Model):
+    def get_short_name(self):
+        pass
+
+    def __str__(self):
+        return self.get_short_name()
+    
     class Meta:
         abstract = True
 
 class Song_Element(Generic_Element, Song):
+    def get_short_name(self):
+        return self.title
+    
     class Meta(Generic_Element.Meta):
         proxy = True
 
 class Prayer_Element(Generic_Element, Prayer):
+    def get_short_name(self):
+        return self.name
+    
     class Meta(Generic_Element.Meta):
         proxy = True
 
 class Reading_Element(Generic_Element):
-    pass
+    title = models.CharField(max_length=200)
+    author = models.CharField(max_length=200, blank=True)
+    text = models.TextField(blank=True)
+
+    def get_short_name(self):
+        return self.title
 
 class Iyun_Element(Generic_Element):
-    pass
+    title = models.CharField(max_length=200)
+    description = models.TextField(blank=True)
+
+    def get_short_name(self):
+        return self.title
 
 class Other_Element(Generic_Element):
-    pass
+    title = models.CharField(max_length=200)
+    description = models.TextField(blank=True)
+
+    def get_short_name(self):
+        return self.title
