@@ -35,7 +35,7 @@ class Chordsheet_Contributor(models.Model):
         return self.name
 
 class Chordsheet(models.Model):
-    file = models.FileField(upload_to="chordsheets/")
+    file = models.FileField(upload_to="chordsheets/", validators=[FileExtensionValidator(["pro"])])
     contributors = models.ManyToManyField(Chordsheet_Contributor)
     song = models.OneToOneField(Song, on_delete=models.CASCADE, primary_key=True)
 
