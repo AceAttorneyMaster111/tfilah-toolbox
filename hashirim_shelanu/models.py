@@ -1,6 +1,7 @@
 import io
 
 from chopro import chopro2html
+from django.core.validators import FileExtensionValidator
 from django.db import models
 from weasyprint import HTML, CSS
 
