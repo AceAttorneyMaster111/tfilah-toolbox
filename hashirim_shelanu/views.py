@@ -20,7 +20,7 @@ def filter(request):
         "artist": "filter_by_artist" in request.GET,
         "prayer": "filter_by_prayer" in request.GET
     }
-    if not any(filter_by):
+    if not filter_by["title"] and not filter_by["artist"] and not filter_by["prayer"]:
         filter_by["title"] = filter_by["artist"] = filter_by["prayer"] = True
 
     filter_text = request.GET["filter_text"]
