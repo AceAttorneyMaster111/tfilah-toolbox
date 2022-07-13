@@ -9,7 +9,6 @@ class Migration(migrations.Migration):
     replaces = [('hashirim_shelanu', '0016_prayertag_songtag_alter_chordsheet_file_prayer_tags_and_more'), ('hashirim_shelanu', '0017_rename_prayertag_prayer_tag_rename_songtag_song_tag'), ('hashirim_shelanu', '0018_delete_prayer_tag_delete_song_tag_alter_prayer_tags_and_more'), ('hashirim_shelanu', '0019_taggedprayer_taggedsong_alter_prayer_tags_and_more'), ('hashirim_shelanu', '0020_remove_taggedsong_content_object_and_more'), ('hashirim_shelanu', '0021_prayertag_songtag_alter_prayer_tags_alter_song_tags')]
 
     dependencies = [
-        ('taggit', '0005_auto_20220424_2025'),
         ('hashirim_shelanu', '0015_artist_picture'),
     ]
 

@@ -24,11 +24,11 @@ def filter(request):
         filter_by["title"] = filter_by["artist"] = filter_by["prayer"] = True
 
     filter_text = request.GET["filter_text"]
-    query = ((Q(title__icontains=filter_text) if filter_by["title"] else Q())
+    query = ((Q(title__icontains=filter_text) | Q(tags__name__icontains=filter_text) if filter_by["title"] else Q())
         | (Q(artist__name__icontains=filter_text) if filter_by["artist"] else Q())
-        | (Q(prayer__name__icontains=filter_text) if filter_by["prayer"] else Q())
+        | (Q(prayer__name__icontains=filter_text) | Q(prayer__tags__name__icontains=filter_text) if filter_by["prayer"] else Q())
     )
-    song_list = Song.objects.filter(query).order_by(request.GET["order_by"])
+    song_list = Song.objects.filter(query).distinct().order_by(request.GET["order_by"])
 
     return render(request, "hashirim_shelanu/search.html",
         {"song_list": song_list, "filter_text": filter_text, "order_by": request.GET["order_by"], "select": filter_by})
