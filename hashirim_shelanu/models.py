@@ -5,9 +5,16 @@ from django.core.validators import FileExtensionValidator
 from django.db import models
 from weasyprint import HTML, CSS
 
+class PrayerTag(models.Model):
+    name = models.SlugField(max_length=100)
+
+    def __str__(self):
+        return "#" + self.name
+
 class Prayer(models.Model):
     name = models.CharField(max_length=200)
     description = models.TextField(blank=True, null=True)
+    tags = models.ManyToManyField(PrayerTag, related_name="prayers")
 
     def __str__(self):
         return self.name
@@ -19,12 +26,18 @@ class Artist(models.Model):
     def __str__(self):
         return self.name if self.name != "Unknown" else f"Unknown (ID {self.id})"
 
+class SongTag(models.Model):
+    name = models.SlugField(max_length=100)
+
+    def __str__(self):
+        return "#" + self.name
+
 class Song(models.Model):
     prayer = models.ForeignKey(Prayer, on_delete=models.CASCADE)
     title = models.CharField(max_length=200)
     artist = models.ForeignKey(Artist, on_delete=models.CASCADE, null=True)
     release_year = models.PositiveSmallIntegerField(blank=True, null=True)
-    # TODO: Ensure chordsheet file
+    tags = models.ManyToManyField(SongTag, related_name="songs")
 
     def __str__(self):
         return f"{self.title} ({self.artist})"
