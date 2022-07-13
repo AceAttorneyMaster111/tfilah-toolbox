@@ -34,8 +34,10 @@
                     <label for="order-by-artist">Artist</label>
 
                     <input type="radio" name="order_by" id="order-by-prayer" value="prayer" {% if order_by == "prayer" %}checked{% endif %}>
-                    <label for="forder-by-prayer">Prayer</label>
+                    <label for="order-by-prayer">Prayer</label>
                 </fieldset>
+                <input type="checkbox" name="include_tags" id="include-tags" {% if include_tags %}checked{% endif %}>
+                <label for="include-tags">Include tags in search</label>
                 <button type="submit">Search</button>
             </form>
             <table>
