@@ -2,7 +2,7 @@ from django.contrib import admin
 
 from .models import *
 
-admin.site.register([Prayer, Chordsheet_Contributor, Artist])
+admin.site.register([Prayer, Artist])
 
 class Chordsheet_Inline(admin.StackedInline):
     model = Chordsheet
@@ -12,8 +12,8 @@ class Song_Admin(admin.ModelAdmin):
 
 admin.site.register(Song, Song_Admin)
 
-class Tag_Admin(admin.ModelAdmin):
+class Index_Hide_Admin(admin.ModelAdmin):
     def has_module_permission(self, request):
         return False
 
-admin.site.register([Song_Tag, Prayer_Tag], Tag_Admin)
+admin.site.register([Song_Tag, Prayer_Tag, Chordsheet_Contributor], Index_Hide_Admin)
