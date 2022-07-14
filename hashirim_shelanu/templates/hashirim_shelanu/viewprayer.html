@@ -10,6 +10,12 @@
         {% include "tfilah_toolbox/header.html" %}
         <main>
             <h1>{{ prayer.name }}</h1>
+            <p>Tags:</p>
+            <ul>
+                {% for tag in prayer.tags.all %}
+                    <li>{{ tag }}</li>
+                {% endfor %}
+            </ul>
             <p>{{ prayer.description }}</p>
         </main>
         {% include "tfilah_toolbox/footer.html" %}
