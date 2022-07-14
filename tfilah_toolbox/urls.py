@@ -22,7 +22,7 @@ from . import views
 
 urlpatterns = [
     path("hashirim_shelanu/", include("hashirim_shelanu.urls")),
-    path("service_generator", include("service_generator.urls")),
+    path("service_generator/", include("service_generator.urls")),
     path('admin/', admin.site.urls),
     path("", views.index)
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

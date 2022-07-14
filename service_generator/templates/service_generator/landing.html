@@ -7,6 +7,13 @@
     </head>
     <body>
         {% include "tfilah_toolbox/header.html" %}
+        <main>
+            <ul>
+                {% for service in service_types %}
+                    <li><a href="{% url 'service_generator:create_service' service.id %}">{{ service }}</a></li>
+                {% endfor %}
+            </ul>
+        </main>
         {% include "tfilah_toolbox/footer.html" %}
     </body>
 </html>
