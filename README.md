@@ -9,12 +9,12 @@ HaShirim Shelanu is a searchable database of liturgical music and chord sheets.
 
 * Admin site: Upload new chordsheets, add new songs and prayers and services
 * Search and order songs by title, artist, and prayer
+* Prayers and songs have searchable tags
 * View chordsheet and other data associated with each song
+* View data about prayers and artists
 * Download the ChordPro and PDF versions of the chordsheet
 
 ### Future functionality:
-* View data about prayers and artists
-* Sort by other categories, like tags
 * Accounts to view database
 * Get statistics of how songs are being used/viewed
 * Verified artist accounts
