@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Service Generator | {{ service_type }}</title>
+        <link rel="stylesheet" type="text/css" href="{% static 'tfilah_toolbox/style.css' %}">
+    </head>
+    <body>
+        {% include "tfilah_toolbox/header.html" %}
+        <main>
+            <p><a href="#" onclick="history.back(); return false;">&lt; Go back</a></p>
+            <h1>{{ service_type }}</h1>
+            <p>{{ service_type.description }}</p>
+            <p>Prayers:</p>
+            <ol>
+                {% for prayer in service_type.prayers.all %}
+                    <li><a href="{% url 'hashirim_shelanu:viewprayer' prayer.id %}">{{ prayer }}</a></li>
+                {% endfor %}
+            </ol>
+        </main>
+        {% include "tfilah_toolbox/footer.html" %}
+    </body>
+</html>

@@ -10,7 +10,11 @@
         <main>
             <ul>
                 {% for service in service_types %}
-                    <li><a href="{% url 'service_generator:create_service' service.id %}">{{ service }}</a></li>
+                    <li>
+                        <h4>{{ service }}</h4>
+                        <a href="{% url 'service_generator:view_service_type' service.id %}">More Info</a>
+                        <a href="{% url 'service_generator:begin_service' service.id %}">Begin Service</a>
+                    </li>
                 {% endfor %}
             </ul>
         </main>
