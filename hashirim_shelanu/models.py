@@ -26,7 +26,7 @@ class Artist(models.Model):
     def __str__(self):
         return self.name if self.name != "Unknown" else f"Unknown (ID {self.id})"
 
-class Song_Tag(models.Model):
+class SongTag(models.Model):
     name = models.SlugField(max_length=100)
 
     def __str__(self):
@@ -37,12 +37,12 @@ class Song(models.Model):
     title = models.CharField(max_length=200)
     artist = models.ForeignKey(Artist, on_delete=models.CASCADE, null=True)
     release_year = models.PositiveSmallIntegerField(blank=True, null=True)
-    tags = models.ManyToManyField(Song_Tag, related_name="songs")
+    tags = models.ManyToManyField(SongTag, related_name="songs")
 
     def __str__(self):
         return f"{self.title} ({self.artist})"
 
-class Chordsheet_Contributor(models.Model):
+class ChordsheetContributor(models.Model):
     name = models.CharField(max_length=100)
 
     def __str__(self):
@@ -50,7 +50,7 @@ class Chordsheet_Contributor(models.Model):
 
 class Chordsheet(models.Model):
     file = models.FileField(upload_to="chordsheets/", validators=[FileExtensionValidator(["pro"])])
-    contributors = models.ManyToManyField(Chordsheet_Contributor)
+    contributors = models.ManyToManyField(ChordsheetContributor)
     song = models.OneToOneField(Song, on_delete=models.CASCADE, primary_key=True)
 
     def get_pdf(self):

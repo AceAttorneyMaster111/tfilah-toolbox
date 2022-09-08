@@ -7,7 +7,7 @@ from hashirim_shelanu.models import Prayer, Song
 
 # Create your models here.
 
-class Service_Type(models.Model):
+class ServiceType(models.Model):
     name = models.CharField(max_length=200)
     description = models.TextField(blank=True)
     prayers = models.ManyToManyField(Prayer, through="Prayer_Position")
@@ -15,9 +15,9 @@ class Service_Type(models.Model):
     def __str__(self):
         return self.name
 
-class Prayer_Position(models.Model):
+class PrayerPosition(models.Model):
     prayer = models.ForeignKey(Prayer, on_delete=models.CASCADE)
-    service_type = models.ForeignKey(Service_Type, on_delete=models.CASCADE)
+    service_type = models.ForeignKey(ServiceType, on_delete=models.CASCADE)
     index = models.PositiveSmallIntegerField(unique=True)
     class Meta:
         ordering = ["index"]
@@ -29,7 +29,7 @@ class Prayer_Position(models.Model):
         # )]
 
 class Service_Element(models.Model):
-    class Element_Types(models.IntegerChoices):
+    class ElementTypes(models.IntegerChoices):
         SONG = 1, "Song"
         PRAYER = 2, "Prayer"
         READING = 3, "Reading"
@@ -43,7 +43,7 @@ class Service_Element(models.Model):
                 limit |= models.Q(app_label="service_generator", model=name + "_Element")
             return limit
     
-    element_type = models.ForeignKey(ContentType, on_delete=models.CASCADE, limit_choices_to=Element_Types.get_limit_query())
+    element_type = models.ForeignKey(ContentType, on_delete=models.CASCADE, limit_choices_to=ElementTypes.get_limit_query())
     object_id = models.PositiveIntegerField()
     object = GenericForeignKey("element_type", "object_id")
     point = models.CharField(max_length=200)
@@ -54,7 +54,7 @@ class Service(models.Model):
     service_type = models.ForeignKey(Service_Type, on_delete=models.CASCADE)
     element_list = models.ManyToManyField(Service_Element, through="Element_Position")
 
-class Element_Position(models.Model):
+class ElementPosition(models.Model):
     element = models.ForeignKey(Service_Element, on_delete=models.CASCADE)
     service = models.ForeignKey(Service, on_delete=models.CASCADE)
     index = models.PositiveSmallIntegerField(unique=True)
@@ -68,7 +68,7 @@ class Element_Position(models.Model):
         # )]
 
 
-class Generic_Element(models.Model):
+class GenericElement(models.Model):
     def get_short_name(self):
         pass
 
@@ -78,21 +78,21 @@ class Generic_Element(models.Model):
     class Meta:
         abstract = True
 
-class Song_Element(Generic_Element, Song):
+class SongElement(GenericElement, Song):
     def get_short_name(self):
         return self.title
     
-    class Meta(Generic_Element.Meta):
+    class Meta(GenericElement.Meta):
         proxy = True
 
-class Prayer_Element(Generic_Element, Prayer):
+class PrayerElement(GenericElement, Prayer):
     def get_short_name(self):
         return self.name
     
-    class Meta(Generic_Element.Meta):
+    class Meta(GenericElement.Meta):
         proxy = True
 
-class Reading_Element(Generic_Element):
+class ReadingElement(GenericElement):
     title = models.CharField(max_length=200)
     author = models.CharField(max_length=200, blank=True)
     text = models.TextField(blank=True)
@@ -100,14 +100,14 @@ class Reading_Element(Generic_Element):
     def get_short_name(self):
         return self.title
 
-class Iyun_Element(Generic_Element):
+class IyunElement(GenericElement):
     title = models.CharField(max_length=200)
     description = models.TextField(blank=True)
 
     def get_short_name(self):
         return self.title
 
-class Other_Element(Generic_Element):
+class OtherElement(GenericElement):
     title = models.CharField(max_length=200)
     description = models.TextField(blank=True)
 
