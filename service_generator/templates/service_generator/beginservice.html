@@ -9,7 +9,14 @@
     <body>
         {% include "tfilah_toolbox/header.html" %}
         <main>
-
+            <form action="{% url 'service_generator:generate_template' %}" method="POST">
+                <div>
+                    <h2>Basic Info</h2>
+                    <label for="title">Title:</label>
+                    <input type="text" name="title" id="title" placeholder="Title">
+                    <!-- TODO -->
+                </div>
+            </form>
         </main>
         {% include "tfilah_toolbox/footer.html" %}
     </body>
