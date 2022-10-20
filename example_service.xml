@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- THIS IS A DRAFT -->
+<service>
+    <metadata>
+        <servicetype>Arvit l'Shabbat</servicetype>
+        <occasion>Session 2 Week 1</occasion>
+        <year calendar="gregorian">2022</year>
+        <community>URJ 6 Points Sci-Tech Academy</community>
+        <theme>PERSPECTIVE - Being Aware of Your Surroundings</theme>
+        <mood>Goofy, high energy</mood>
+        <time>1:15</time>
+        <parashah>Parashat Balak</parashah>
+        <space>PAC</space>
+        <style>
+            <!-- TODO -->
+        </style>
+    </metadata>
+    <section name="Kabbalat Shabbat">
+        <element type="song" id="12345"><!-- The ID number of Bo'i Kalah in Hashirim Shelanu -->
+            <!-- Note: SHOULD be reliant on the database to work. -->
+            <key>D</key>
+            <capo>0</capo>
+            <point>Noah</point>
+            <supporting>
+                <supporter>Ezri</supporter>
+            </supporting>
+        </element>
+        <element type="song" id="11111"><!-- China Camp Nigun -->
+            <key>A</key>
+            <capo>0</capo>
+            <point>Noah</point>
+            <supporting>
+                <supporter>Ezri</supporter>
+            </supporting>
+        </element>
+        <element type="iyun">
+            <name>Opening</name>
+            <point>Ezri + Noah</point> <!-- TODO: Do I like this? -->
+        </element>
+        <element type="song" id="22222"><!-- Ya'aloz Sadai -->
+            <key naming="absolute">C#m</key>
+            <capo>4</capo>
+            <point>Noah</point>
+            <supporting>
+                <supporter>Schmidty</supporter>
+                <supporter>Ezri</supporter>
+            </supporting>
+            <notes>Let the field be joyful and everything in it; then shall all the trees of the wood sing for joy.</notes>
+        </element>
+        <element type="song" id="33333"><!-- L'cha Dodi -->
+            <key naming="absolute">C#m</key>
+            <capo>4</capo>
+            <point>Noah</point>
+            <supporting>
+                <supporter>Schmidty</supporter>
+                <supporter>Ezri</supporter>
+            </supporting>
+        </element>
+    </section>
+</service>

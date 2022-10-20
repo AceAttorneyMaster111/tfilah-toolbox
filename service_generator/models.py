@@ -47,6 +47,7 @@ class Service_Element(models.Model):
     object_id = models.PositiveIntegerField()
     object = GenericForeignKey("element_type", "object_id")
     point = models.CharField(max_length=200)
+    supporting = None
 
 # ********************************
 # ****** REMOVED FROM SPEC *******
