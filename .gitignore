@@ -3,3 +3,4 @@ secrets.py
 uploads/*
 .DS_Store
 __pycache__
+.idea
