@@ -10,7 +10,7 @@ from hashirim_shelanu.models import Prayer, Song
 class ServiceType(models.Model):
     name = models.CharField(max_length=200)
     description = models.TextField(blank=True)
-    prayers = models.ManyToManyField(Prayer, through="Prayer_Position")
+    prayers = models.ManyToManyField(Prayer, through="PrayerPosition")
 
     def __str__(self):
         return self.name
@@ -39,7 +39,7 @@ class Service_Element(models.Model):
         @classmethod
         def get_limit_query(cls):
             limit = models.Q()
-            for i, name in cls.choices:
+            for _, name in cls.choices:
                 limit |= models.Q(app_label="service_generator", model=name + "_Element")
             return limit
     
@@ -48,24 +48,27 @@ class Service_Element(models.Model):
     object = GenericForeignKey("element_type", "object_id")
     point = models.CharField(max_length=200)
 
-class Service(models.Model):
-    title = models.CharField(max_length=200)
-    description = models.TextField(blank=True)
-    service_type = models.ForeignKey(Service_Type, on_delete=models.CASCADE)
-    element_list = models.ManyToManyField(Service_Element, through="Element_Position")
+# ********************************
+# ****** REMOVED FROM SPEC *******
+# ********************************
+# class Service(models.Model):
+#     title = models.CharField(max_length=200)
+#     description = models.TextField(blank=True)
+#     service_type = models.ForeignKey(Service_Type, on_delete=models.CASCADE)
+#     element_list = models.ManyToManyField(Service_Element, through="Element_Position")
 
-class ElementPosition(models.Model):
-    element = models.ForeignKey(Service_Element, on_delete=models.CASCADE)
-    service = models.ForeignKey(Service, on_delete=models.CASCADE)
-    index = models.PositiveSmallIntegerField(unique=True)
+# class ElementPosition(models.Model):
+#     element = models.ForeignKey(Service_Element, on_delete=models.CASCADE)
+#     service = models.ForeignKey(Service, on_delete=models.CASCADE)
+#     index = models.PositiveSmallIntegerField(unique=True)
 
-    class Meta:
-        ordering = ["index"]
-        # constraints = [UniqueConstraint(
-        #     name="element_unique_index",
-        #     fields=["index"],
-        #     deferrable=Deferrable.DEFERRED
-        # )]
+#     class Meta:
+#         ordering = ["index"]
+#         # constraints = [UniqueConstraint(
+#         #     name="element_unique_index",
+#         #     fields=["index"],
+#         #     deferrable=Deferrable.DEFERRED
+#         # )]
 
 
 class GenericElement(models.Model):

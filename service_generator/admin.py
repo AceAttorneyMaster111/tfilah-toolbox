@@ -1,11 +1,11 @@
 from django.contrib import admin
 
-from .models import Prayer_Position, ServiceType
+from .models import PrayerPosition, ServiceType
 
 # Register your models here.
 
 class PrayerPositionInline(admin.TabularInline):
-    model = Prayer_Position
+    model = PrayerPosition
     extra = 1
 
 class ServiceTypeAdmin(admin.ModelAdmin):

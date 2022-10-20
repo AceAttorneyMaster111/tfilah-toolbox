@@ -1,6 +1,6 @@
 from django.shortcuts import get_object_or_404, render
 
-from .models import Service_Type
+from .models import ServiceType
 
 # Create your views here.
 def landing(request):
