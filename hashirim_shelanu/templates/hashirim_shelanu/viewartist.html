@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 {% load static %}
-<html>
+<html lang="en-us">
     <head>
         <meta charset="utf-8">
         <title>Hashirim Shelanu | {{ artist.name }}</title>
@@ -11,7 +11,7 @@
         <main>
             <p><a href="#" onclick="history.back(); return false;">&lt; Go back</a></p>
             <h1>{{ artist }}</h1>
-            <img src="{% if artist.picture %}{{ artist.picture.url }}{% else %}{% static 'hashirim_shelanu/Unknown-person.gif' %}{% endif %}" height="250">
+            <img src="{% if artist.picture %}{{ artist.picture.url }}{% else %}{% static 'hashirim_shelanu/Unknown-person.gif' %}{% endif %}" height="250" alt="{{ artist }}">
         </main>
         {% include "tfilah_toolbox/footer.html" %}
     </body>
