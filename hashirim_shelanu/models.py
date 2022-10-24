@@ -5,19 +5,22 @@ from django.core.validators import FileExtensionValidator
 from django.db import models
 from weasyprint import HTML, CSS
 
-class Prayer_Tag(models.Model):
+
+class PrayerTag(models.Model):
     name = models.SlugField(max_length=100)
 
     def __str__(self):
         return "#" + self.name
 
+
 class Prayer(models.Model):
     name = models.CharField(max_length=200)
     description = models.TextField(blank=True, null=True)
-    tags = models.ManyToManyField(Prayer_Tag, related_name="prayers")
+    tags = models.ManyToManyField(PrayerTag, related_name="prayers")
 
     def __str__(self):
         return self.name
+
 
 class Artist(models.Model):
     name = models.CharField(max_length=200)
@@ -26,11 +29,13 @@ class Artist(models.Model):
     def __str__(self):
         return self.name if self.name != "Unknown" else f"Unknown (ID {self.id})"
 
+
 class SongTag(models.Model):
     name = models.SlugField(max_length=100)
 
     def __str__(self):
         return "#" + self.name
+
 
 class Song(models.Model):
     prayer = models.ForeignKey(Prayer, on_delete=models.CASCADE)
@@ -42,11 +47,13 @@ class Song(models.Model):
     def __str__(self):
         return f"{self.title} ({self.artist})"
 
+
 class ChordsheetContributor(models.Model):
     name = models.CharField(max_length=100)
 
     def __str__(self):
         return self.name
+
 
 class Chordsheet(models.Model):
     file = models.FileField(upload_to="chordsheets/", validators=[FileExtensionValidator(["pro"])])
@@ -58,26 +65,26 @@ class Chordsheet(models.Model):
 
         self.file.open("r")
         chordsheet_html = HTML(string=chopro2html(self.file.read()) +
-        "<div id=chordsheet-contributor>"
-            "<i>Contributed by " + str(self.list_contributors) +
-        "</div>")
+                               f"<div id=chordsheet-contributor>"
+                               f"    <i>Contributed by {str(self.list_contributors)}</i>"
+                               f"</div>")
         chordsheet_css = CSS(string="div.chords-lyrics-line {"
-        "   display: flex;"
-        "   font-family: Roboto Mono, monospace;"
-        "}"
-        "#chordsheet-contributor {"
-        "   padding-top: 10px;"
-        "}"
-        "div.chords:empty::before {"
-        "   content: ' ';"
-        "   white-space: pre;"
-        "}")
+                             "   display: flex;"
+                             "   font-family: Roboto Mono, monospace;"
+                             "}"
+                             "#chordsheet-contributor {"
+                             "   padding-top: 10px;"
+                             "}"
+                             "div.chords:empty::before {"
+                             "   content: ' ';"
+                             "   white-space: pre;"
+                             "}")
         self.file.close()
 
         chordsheet_html.write_pdf(buffer, stylesheets=[chordsheet_css])
         buffer.seek(0)
         return buffer
-    
+
     @property
     def list_contributors(self):
         contributors = self.contributors.all()

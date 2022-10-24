@@ -7,6 +7,7 @@ from hashirim_shelanu.models import Prayer, Song
 
 # Create your models here.
 
+
 class ServiceType(models.Model):
     name = models.CharField(max_length=200)
     description = models.TextField(blank=True)
@@ -15,10 +16,12 @@ class ServiceType(models.Model):
     def __str__(self):
         return self.name
 
+
 class PrayerPosition(models.Model):
     prayer = models.ForeignKey(Prayer, on_delete=models.CASCADE)
     service_type = models.ForeignKey(ServiceType, on_delete=models.CASCADE)
     index = models.PositiveSmallIntegerField(unique=True)
+
     class Meta:
         ordering = ["index"]
         # TODO: Switch to PostgreSQL, which supports this
@@ -28,7 +31,8 @@ class PrayerPosition(models.Model):
         #     deferrable=Deferrable.DEFERRED
         # )]
 
-class Service_Element(models.Model):
+
+class ServiceElement(models.Model):
     class ElementTypes(models.IntegerChoices):
         SONG = 1, "Song"
         PRAYER = 2, "Prayer"
@@ -43,7 +47,11 @@ class Service_Element(models.Model):
                 limit |= models.Q(app_label="service_generator", model=name + "_Element")
             return limit
     
-    element_type = models.ForeignKey(ContentType, on_delete=models.CASCADE, limit_choices_to=ElementTypes.get_limit_query())
+    element_type = models.ForeignKey(
+        ContentType,
+        on_delete=models.CASCADE,
+        limit_choices_to=ElementTypes.get_limit_query()
+    )
     object_id = models.PositiveIntegerField()
     object = GenericForeignKey("element_type", "object_id")
     point = models.CharField(max_length=200)
@@ -82,6 +90,7 @@ class GenericElement(models.Model):
     class Meta:
         abstract = True
 
+
 class SongElement(GenericElement, Song):
     def get_short_name(self):
         return self.title
@@ -89,12 +98,14 @@ class SongElement(GenericElement, Song):
     class Meta(GenericElement.Meta):
         proxy = True
 
+
 class PrayerElement(GenericElement, Prayer):
     def get_short_name(self):
         return self.name
     
     class Meta(GenericElement.Meta):
         proxy = True
+
 
 class ReadingElement(GenericElement):
     title = models.CharField(max_length=200)
@@ -104,12 +115,14 @@ class ReadingElement(GenericElement):
     def get_short_name(self):
         return self.title
 
+
 class IyunElement(GenericElement):
     title = models.CharField(max_length=200)
     description = models.TextField(blank=True)
 
     def get_short_name(self):
         return self.title
+
 
 class OtherElement(GenericElement):
     title = models.CharField(max_length=200)
