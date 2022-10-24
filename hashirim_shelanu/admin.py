@@ -1,4 +1,5 @@
 from django.contrib import admin
+from django.http import HttpRequest
 
 from .models import *
 
@@ -17,7 +18,7 @@ admin.site.register(Song, SongAdmin)
 
 
 class IndexHideAdmin(admin.ModelAdmin):
-    def has_module_permission(self, request):
+    def has_module_permission(self, request: HttpRequest):
         return False
 
 

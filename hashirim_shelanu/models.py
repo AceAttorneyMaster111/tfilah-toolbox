@@ -60,7 +60,7 @@ class Chordsheet(models.Model):
     contributors = models.ManyToManyField(ChordsheetContributor)
     song = models.OneToOneField(Song, on_delete=models.CASCADE, primary_key=True)
 
-    def get_pdf(self):
+    def get_pdf(self) -> io.BytesIO:
         buffer = io.BytesIO()
 
         self.file.open("r")
@@ -86,11 +86,12 @@ class Chordsheet(models.Model):
         return buffer
 
     @property
-    def list_contributors(self):
-        contributors = self.contributors.all()
+    def list_contributors(self) -> str:
+        contributors: models.QuerySet[ChordsheetContributor] = self.contributors.all()
         if len(contributors) == 1:
-            return contributors[0]
+            return str(contributors[0])
         if len(contributors) == 2:
-            return contributors[0] + " and " + contributors[1]
-        contributors[-1] = "and " + contributors[-1]
-        return ", ".join(contributors)
+            return str(contributors[0]) + " and " + str(contributors[1])
+        contributor_strings: list[str] = [str(contributor) for contributor in contributors]
+        contributor_strings[-1] = "and " + str(contributors[-1])
+        return ", ".join(contributor_strings)

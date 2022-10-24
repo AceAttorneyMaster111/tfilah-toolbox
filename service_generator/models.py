@@ -41,7 +41,7 @@ class ServiceElement(models.Model):
         OTHER = 5, "Other"
 
         @classmethod
-        def get_limit_query(cls):
+        def get_limit_query(cls) -> models.Q:
             limit = models.Q()
             for _, name in cls.choices:
                 limit |= models.Q(app_label="service_generator", model=name + "_Element")
@@ -81,8 +81,8 @@ class ServiceElement(models.Model):
 
 
 class GenericElement(models.Model):
-    def get_short_name(self):
-        pass
+    def get_short_name(self) -> str:
+        raise NotImplementedError("Cannot run abstract method")
 
     def __str__(self):
         return self.get_short_name()
@@ -92,7 +92,7 @@ class GenericElement(models.Model):
 
 
 class SongElement(GenericElement, Song):
-    def get_short_name(self):
+    def get_short_name(self) -> str:
         return self.title
     
     class Meta(GenericElement.Meta):
@@ -100,7 +100,7 @@ class SongElement(GenericElement, Song):
 
 
 class PrayerElement(GenericElement, Prayer):
-    def get_short_name(self):
+    def get_short_name(self) -> str:
         return self.name
     
     class Meta(GenericElement.Meta):
@@ -112,7 +112,7 @@ class ReadingElement(GenericElement):
     author = models.CharField(max_length=200, blank=True)
     text = models.TextField(blank=True)
 
-    def get_short_name(self):
+    def get_short_name(self) -> str:
         return self.title
 
 
@@ -120,7 +120,7 @@ class IyunElement(GenericElement):
     title = models.CharField(max_length=200)
     description = models.TextField(blank=True)
 
-    def get_short_name(self):
+    def get_short_name(self) -> str:
         return self.title
 
 
@@ -128,5 +128,5 @@ class OtherElement(GenericElement):
     title = models.CharField(max_length=200)
     description = models.TextField(blank=True)
 
-    def get_short_name(self):
+    def get_short_name(self) -> str:
         return self.title
