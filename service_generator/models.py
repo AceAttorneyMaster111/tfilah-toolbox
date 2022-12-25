@@ -1,5 +1,6 @@
 from django.contrib.contenttypes.fields import GenericForeignKey
 from django.contrib.contenttypes.models import ContentType
+# from django.contrib.postgres.fields import ArrayField
 from django.db import models
 # from django.db.models.constraints import Deferrable, UniqueConstraint
 
@@ -55,7 +56,22 @@ class ServiceElement(models.Model):
     object_id = models.PositiveIntegerField()
     object = GenericForeignKey("element_type", "object_id")
     point = models.CharField(max_length=200)
-    supporting = None
+
+    # supporting = ArrayField(models.CharField(max_length=200))
+    # TEMPORARY SOLUTION WITHOUT POSTGRES
+    _supporting = models.CharField(max_length=2000, blank=True)
+
+    @property
+    def supporting(self) -> list[str]:
+        return self._supporting.split(", ")
+
+    @supporting.setter
+    def supporting(self, value: list[str]):
+        self._supporting = ", ".join(value)
+        self.save()
+
+    def get_supporters_str(self) -> str:
+        return self._supporting
 
 # ********************************
 # ****** REMOVED FROM SPEC *******
