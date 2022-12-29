@@ -5,17 +5,52 @@
         <meta charset="utf-8">
         <title>Service Generator | {{ service_type.name }}</title>
         <link rel="stylesheet" type="text/css" href="{% static 'tfilah_toolbox/style.css' %}">
+        <script src="{% static 'service_generator/script.js' %}"></script>
     </head>
     <body>
         {% include "tfilah_toolbox/header.html" %}
         <main>
-            <form action="{% url 'service_generator:generate_template' %}" method="POST">
+            <form action="{% url 'service_generator:generate_template' service_type.id %}" method="POST">
                 <div>
                     <h2>Basic Info</h2>
-                    <label for="title">Title:</label>
-                    <input type="text" name="title" id="title" placeholder="Title">
+                    <div>
+                        <label for="title">Title:</label>
+                        <input type="text" name="title" id="title" placeholder="Example Service" required>
+                    </div>
+                    <div>
+                        <label for="occasion">Date or occasion:</label>
+                        <input type="text" name="occasion" id="occasion" placeholder="Shabbat Noach 5783">
+                    </div> <!-- TODO: JavaScript magic to switch between date or occasion+year? -->
+                    <div>
+                        <label for="community">Community:</label>
+                        <input type="text" name="community" id="community" placeholder="Temple ABC">
+                    </div>
+                    <div>
+                        <label for="theme">Theme:</label>
+                        <input type="text" name="theme" id="theme" placeholder="Social justice">
+                    </div>
+                    <div>
+                        <label for="mood">Mood:</label>
+                        <input type="text" name="mood" id="mood" placeholder="Uplifting">
+                    </div>
+                    <div>
+                        <label for="time">Time allotted:</label>
+                        <input type="text" name="time" id="time" placeholder="1:15">
+                    </div>
+                    <div>
+                        <label for="parashah">Torah portion:</label>
+                        <input type="text" name="parashah" id="parashah" placeholder="Parashat Noach">
+                    </div>
+                    <div>
+                        <label for="space">Space:</label>
+                        <input type="text" name="space" id="space" placeholder="Sanctuary">
+                    </div>
+                </div>
+                <div>
+                    <h2>Style</h2>
                     <!-- TODO -->
                 </div>
+                <button type="submit">Next</button>
             </form>
         </main>
         {% include "tfilah_toolbox/footer.html" %}

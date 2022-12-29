@@ -16,7 +16,7 @@
             <ol>
                 {% for prayer in service_type.prayers.all %}
                     <li><a href="{% url 'hashirim_shelanu:viewprayer' prayer.id %}">{{ prayer }}</a></li>
-                {% endfor %}
+                {% endfor %} <!-- TODO update this -->
             </ol>
         </main>
         {% include "tfilah_toolbox/footer.html" %}

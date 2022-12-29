@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en-us">
+    <head>
+        <meta charset="utf-8">
+        <title>T'filah Toolbox | Service Generator</title>
+        <link rel="stylesheet" type="text/css" href="{% static 'tfilah_toolbox/style.css' %}">
+    </head>
+    <body>
+        {% include "tfilah_toolbox/header.html" %}
+        <main>
+            <p>Current section: <a href="{% url 'service_generator:view_section' section.id %}">{{ section }}</a></p>
+            <p>Current prayer: <a href="{% url 'hashirim_shelanu:viewprayer' prayer.id %}">{{ prayer }}</a></p>
+            <form action="{% url 'service_generator:add_element' %}" method="POST">
+                <fieldset>
+                    <legend>Choose element type to add:</legend>
+
+                    <input type="radio" name="element_type" id="element-type-song" value="song">
+                    <label for="element-type-song">Song (from the Hashirim Shelanu database)</label>
+
+                    <input type="radio" name="element_type" id="element-type-prayer" value="prayer">
+                    <label for="element-type-prayer">Prayer (e.g. read with no melody or standard nusach)</label>
+
+                    <input type="radio" name="element_type" id="element-type-reading" value="reading">
+                    <label for="element-type-reading">Reading</label>
+
+                    <input type="radio" name="element_type" id="element-type-iyun" value="iyun">
+                    <label for="element-type-iyun">Iyun (intentional moment)</label>
+
+                    <input type="radio" name="element_type" id="element-type-other" value="other">
+                    <label for="element-type-other">Other</label>
+
+                    <input type="radio" name="element_type" id="element-type-continue" value="">
+                    <label for="element-type-continue">
+                        {% if next_prayer_name.1 == None %}
+                            <strong>Finalize service</strong>
+                        {% else %}
+                            Continue to next
+                            {% if next_prayer_name.0 == None %}
+                                prayer ({{ next_prayer_name.1 }})
+                            {% else %}
+                                section ({{ next_prayer_name.0 }}&mdash;{{ next_prayer_name.1 }})
+                            {% endif %}
+                        {% endif %}
+                    </label>
+                </fieldset>
+                <button type="submit">Add</button>
+            </form>
+        </main>
+        {% include "tfilah_toolbox/footer.html" %}
+    </body>
+</html>
