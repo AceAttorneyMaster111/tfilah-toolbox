@@ -16,6 +16,7 @@ Including another URLconf
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
+from django.contrib.auth.views import LoginView, LogoutView
 from django.urls import include, path
 
 from . import views
@@ -23,6 +24,8 @@ from . import views
 urlpatterns = [
     path("hashirim_shelanu/", include("hashirim_shelanu.urls")),
     path("service_generator/", include("service_generator.urls")),
-    path('admin/', admin.site.urls),
-    path("", views.index)
+    path("admin/", admin.site.urls),
+    path("", views.index),
+    path("login", LoginView.as_view(template_name="tfilah_toolbox/login.html"), name="login"),
+    path("logout", LogoutView.as_view(), name="logout")
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

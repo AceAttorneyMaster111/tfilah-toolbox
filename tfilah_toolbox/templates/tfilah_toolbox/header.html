@@ -1,5 +1,12 @@
 <header>
     <h1><a href="/">T'filah Toolbox</a></h1>
+    <div id="auth-link">
+        {% if user.is_authenticated %}
+            <a href="{% url 'logout' %}">Log out</a>
+        {% else %}
+            <a href="{% url 'login' %}">Curator login</a>
+        {% endif %}
+    </div>
     <nav>
         <a href="/">HaShirim Shelanu</a>
         <a href="/service_generator">Service Generator</a>
