@@ -10,5 +10,8 @@
     <nav>
         <a href="/">HaShirim Shelanu</a>
         <a href="/service_generator">Service Generator</a>
+        {% if user.is_staff %}
+            <a href="/admin">Edit content</a>
+        {% endif %}
     </nav>
 </header>
