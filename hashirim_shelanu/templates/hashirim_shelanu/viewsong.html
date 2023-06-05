@@ -1,40 +1,35 @@
-<!DOCTYPE html>
+{% extends "tfilah_toolbox/base.html" %}
 {% load static %}
-<html lang="en-us">
-    <head>
-        <meta charset="utf-8">
-        <title>Hashirim Shelanu | "{{ song.title }}" &mdash; {{ song.artist.name }}</title>
-        <link rel="stylesheet" type="text/css" href="{% static 'hashirim_shelanu/viewsong.css' %}">
-        <link rel="stylesheet" type="text/css" href="{% static 'tfilah_toolbox/style.css' %}">
-    </head>
-    <body>
-        {% include "tfilah_toolbox/header.html" %}
-        <main>
-            <div id="main-head">
-                <p><a href="#" onclick="history.back(); return false;">&lt; Go back</a></p>
-                <h2>{{ song.title }}</h2>
-                <h3>{{ song.artist }}</h3>
-                <p>Prayer: <b>{{ song.prayer.name }}</b></p>
-                <form action="{% url 'hashirim_shelanu:download_chordpro' song.id %}" method="GET">
-                    <button type="submit">Download ChordPro</button>
-                </form>
-                <form action="{% url 'hashirim_shelanu:download_pdf' song.id %}" method="GET">
-                    <button type="submit">Download PDF</button>
-                </form>
-                <p>Tags:</p>
-                <ul>
-                    {% for tag in song.tags.all %}
-                        <li>{{ tag }}</li>
-                    {% endfor %}
-                </ul>
-            </div>
-            <div id="chordsheet-display">
-                {{ chordsheet_html|safe }}
-            </div>
-            <div id="chordsheet-contributor">
-                <i>Contributed by {{ song.chordsheet.list_contributors }}</i>
-            </div>
-        </main>
-        {% include "tfilah_toolbox/footer.html" %}
-    </body>
-</html>
+
+{% block title %}Hashirim Shelanu | "{{ song.title }}" &mdash; {{ song.artist.name }}{% endblock %}
+
+{% block meta %}
+    <link rel="stylesheet" type="text/css" href="{% static 'hashirim_shelanu/viewsong.css' %}">
+{% endblock %}
+
+{% block content %}
+    <div id="main-head">
+        <p><a href="#" onclick="history.back(); return false;">&lt; Go back</a></p>
+        <h2>{{ song.title }}</h2>
+        <h3>{{ song.artist }}</h3>
+        <p>Prayer: <b>{{ song.prayer.name }}</b></p>
+        <form action="{% url 'hashirim_shelanu:download_chordpro' song.id %}" method="GET">
+            <button type="submit">Download ChordPro</button>
+        </form>
+        <form action="{% url 'hashirim_shelanu:download_pdf' song.id %}" method="GET">
+            <button type="submit">Download PDF</button>
+        </form>
+        <p>Tags:</p>
+        <ul>
+            {% for tag in song.tags.all %}
+                <li>{{ tag }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+    <div id="chordsheet-display">
+        {{ chordsheet_html|safe }}
+    </div>
+    <div id="chordsheet-contributor">
+        <i>Contributed by {{ song.chordsheet.list_contributors }}</i>
+    </div>
+{% endblock %}

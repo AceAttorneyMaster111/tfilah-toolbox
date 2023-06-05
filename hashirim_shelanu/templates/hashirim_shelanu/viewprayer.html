@@ -1,24 +1,15 @@
-<!DOCTYPE html>
-{% load static %}
-<html lang="en-us">
-    <head>
-        <meta charset="utf-8">
-        <title>Hashirim Shelanu | {{ prayer.name }}</title>
-        <link rel="stylesheet" type="text/css" href="{% static 'tfilah_toolbox/style.css' %}">
-    </head>
-    <body>
-        {% include "tfilah_toolbox/header.html" %}
-        <main>
-            <p><a href="#" onclick="history.back(); return false;">&lt; Go back</a></p>
-            <h1>{{ prayer.name }}</h1>
-            <p>Tags:</p>
-            <ul>
-                {% for tag in prayer.tags.all %}
-                    <li>{{ tag }}</li>
-                {% endfor %}
-            </ul>
-            <p>{{ prayer.description }}</p>
-        </main>
-        {% include "tfilah_toolbox/footer.html" %}
-    </body>
-</html>
+{% extends "tfilah_toolbox/base.html" %}
+
+{% block title %}Hashirim Shelanu | {{ prayer.name }}{% endblock %}
+
+{% block content %}
+    <p><a href="#" onclick="history.back(); return false;">&lt; Go back</a></p>
+    <h1>{{ prayer.name }}</h1>
+    <p>Tags:</p>
+    <ul>
+        {% for tag in prayer.tags.all %}
+            <li>{{ tag }}</li>
+        {% endfor %}
+    </ul>
+    <p>{{ prayer.description }}</p>
+{% endblock %}

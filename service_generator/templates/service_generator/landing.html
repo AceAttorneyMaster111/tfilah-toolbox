@@ -1,24 +1,15 @@
-<!DOCTYPE html>
-{% load static %}
-<html lang="en-us">
-    <head>
-        <meta charset="utf-8">
-        <title>T'filah Toolbox | Service Generator</title>
-        <link rel="stylesheet" type="text/css" href="{% static 'tfilah_toolbox/style.css' %}">
-    </head>
-    <body>
-        {% include "tfilah_toolbox/header.html" %}
-        <main>
-            <ul>
-                {% for service in service_types %}
-                    <li>
-                        <h4>{{ service }}</h4>
-                        <a href="{% url 'service_generator:view_service_type' service.id %}">More Info</a>
-                        <a href="{% url 'service_generator:begin_service' service.id %}">Begin Service</a>
-                    </li>
-                {% endfor %}
-            </ul>
-        </main>
-        {% include "tfilah_toolbox/footer.html" %}
-    </body>
-</html>
+{% extends "tfilah_toolbox/base.html" %}
+
+{% block title %}T'filah Toolbox | Service Generator{% endblock %}
+
+{% block content %}
+    <ul>
+        {% for service in service_types %}
+            <li>
+                <h4>{{ service }}</h4>
+                <a href="{% url 'service_generator:view_service_type' service.id %}">More Info</a>
+                <a href="{% url 'service_generator:begin_service' service.id %}">Begin Service</a>
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock %}

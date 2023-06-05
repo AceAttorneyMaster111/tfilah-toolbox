@@ -1,64 +1,59 @@
-<!DOCTYPE html>
+{% extends "tfilah_toolbox/base.html" %}
 {% load static %}
-<html lang="en-us">
-    <head>
-        <meta charset="utf-8">
-        <link rel="stylesheet" type="text/css" href="{% static 'hashirim_shelanu/search.css' %}">
-        <link rel="stylesheet" type="text/css" href="{% static 'tfilah_toolbox/style.css' %}">
-        <title>T'filah Toolbox | Hashirim Shelanu</title>
-    </head>
-    <body>
-        {% include "tfilah_toolbox/header.html" %}
-        <main>
-            <form action="{% url 'hashirim_shelanu:filter' %}" method="GET">
-                <label for="filter-text">Search: </label>
-                <input type="text" name="filter_text" id="filter-text" placeholder="Search text" value="{{ filter_text }}">
-                <fieldset>
-                    <legend>Search by:</legend>
 
-                    <input type="checkbox" name="filter_by_title" id="filter-by-title" {% if select.title %}checked{% endif %}>
-                    <label for="filter-by-title">Title</label>
+{% block meta %}
+    <link rel="stylesheet" type="text/css" href="{% static 'hashirim_shelanu/search.css' %}">
+{% endblock %}
 
-                    <input type="checkbox" name="filter_by_artist" id="filter-by-artist" {% if select.artist %}checked{% endif %}>
-                    <label for="filter-by-artist">Artist</label>
+{% block title %}T'filah Toolbox | Hashirim Shelanu{% endblock %}
 
-                    <input type="checkbox" name="filter_by_prayer" id="filter-by-prayer" {% if select.prayer %}checked{% endif %}>
-                    <label for="filter-by-prayer">Prayer</label>
-                </fieldset>
-                <fieldset>
-                    <legend>Order by:</legend>
+{% block content %}
+    <form action="{% url 'hashirim_shelanu:filter' %}" method="GET">
+        <label for="filter-text">Search: </label>
+        <input type="text" name="filter_text" id="filter-text" placeholder="Search text" value="{{ filter_text }}">
+        <fieldset>
+            <legend>Search by:</legend>
 
-                    <input type="radio" name="order_by" id="order-by-title" value="title" {% if order_by == "title" %}checked{% endif %}>
-                    <label for="order-by-title">Title</label>
+            <input type="checkbox" name="filter_by_title" id="filter-by-title" {% if select.title %}checked{% endif %}>
+            <label for="filter-by-title">Title</label>
 
-                    <input type="radio" name="order_by" id="order-by-artist" value="artist" {% if order_by == "artist" %}checked{% endif %}>
-                    <label for="order-by-artist">Artist</label>
+            <input type="checkbox" name="filter_by_artist" id="filter-by-artist" {% if select.artist %}checked{% endif %}>
+            <label for="filter-by-artist">Artist</label>
 
-                    <input type="radio" name="order_by" id="order-by-prayer" value="prayer" {% if order_by == "prayer" %}checked{% endif %}>
-                    <label for="order-by-prayer">Prayer</label>
-                </fieldset>
-                <input type="checkbox" name="include_tags" id="include-tags" {% if include_tags %}checked{% endif %}>
-                <label for="include-tags">Include tags in search</label>
-                <button type="submit">Search</button>
-            </form>
-            <table>
-                <tr>
-                    <th>Song Title</th>
-                    <th>Artist</th>
-                    <th>Prayer</th>
-                </tr>
-                {% for song in song_list %}
-                    <tr>
-                        <td><a href="{% url 'hashirim_shelanu:viewsong' song.id %}">{{ song.title }}</a></td>
-                        <td><a href="{% url 'hashirim_shelanu:viewartist' song.artist.id %}">{{ song.artist.name }}</a></td>
-                        <td><a href="{% url 'hashirim_shelanu:viewprayer' song.prayer.id %}">{{ song.prayer.name }}</a></td>
-                    </tr>
-                {% endfor %}
-            </table>
-            {% if not song_list %}
-                <p>No results found.</p>
-            {% endif %}
-        </main>
-        {% include "tfilah_toolbox/footer.html" %}
-    </body>
-</html>
+            <input type="checkbox" name="filter_by_prayer" id="filter-by-prayer" {% if select.prayer %}checked{% endif %}>
+            <label for="filter-by-prayer">Prayer</label>
+        </fieldset>
+        <fieldset>
+            <legend>Order by:</legend>
+
+            <input type="radio" name="order_by" id="order-by-title" value="title" {% if order_by == "title" %}checked{% endif %}>
+            <label for="order-by-title">Title</label>
+
+            <input type="radio" name="order_by" id="order-by-artist" value="artist" {% if order_by == "artist" %}checked{% endif %}>
+            <label for="order-by-artist">Artist</label>
+
+            <input type="radio" name="order_by" id="order-by-prayer" value="prayer" {% if order_by == "prayer" %}checked{% endif %}>
+            <label for="order-by-prayer">Prayer</label>
+        </fieldset>
+        <input type="checkbox" name="include_tags" id="include-tags" {% if include_tags %}checked{% endif %}>
+        <label for="include-tags">Include tags in search</label>
+        <button type="submit">Search</button>
+    </form>
+    <table>
+        <tr>
+            <th>Song Title</th>
+            <th>Artist</th>
+            <th>Prayer</th>
+        </tr>
+        {% for song in song_list %}
+            <tr>
+                <td><a href="{% url 'hashirim_shelanu:viewsong' song.id %}">{{ song.title }}</a></td>
+                <td><a href="{% url 'hashirim_shelanu:viewartist' song.artist.id %}">{{ song.artist.name }}</a></td>
+                <td><a href="{% url 'hashirim_shelanu:viewprayer' song.prayer.id %}">{{ song.prayer.name }}</a></td>
+            </tr>
+        {% endfor %}
+    </table>
+    {% if not song_list %}
+        <p>No results found.</p>
+    {% endif %}
+{% endblock %}
