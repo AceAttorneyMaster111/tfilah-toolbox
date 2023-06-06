@@ -40,9 +40,9 @@ class SongTag(models.Model):
 class Song(models.Model):
     prayer = models.ForeignKey(Prayer, on_delete=models.CASCADE)
     title = models.CharField(max_length=200)
-    artist = models.ForeignKey(Artist, on_delete=models.CASCADE, null=True)
+    artist = models.ForeignKey(Artist, on_delete=models.CASCADE)
     release_year = models.PositiveSmallIntegerField(blank=True, null=True)
-    tags = models.ManyToManyField(SongTag, related_name="songs")
+    tags = models.ManyToManyField(SongTag, related_name="songs", blank=True)
 
     def __str__(self):
         return f"{self.title} ({self.artist})"

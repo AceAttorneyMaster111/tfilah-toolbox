@@ -48,9 +48,12 @@ def search_filter(request: HttpRequest) -> HttpResponse:
 
 def viewsong(request: HttpRequest, song_id: int) -> HttpResponse:
     song = get_object_or_404(Song, pk=song_id)
-    song.chordsheet.file.open("r")
-    chordsheet_html: str = chopro2html(song.chordsheet.file.read())
-    song.chordsheet.file.close()
+    if hasattr(song, "chordsheet"):
+        song.chordsheet.file.open("r")
+        chordsheet_html: str = chopro2html(song.chordsheet.file.read())
+        song.chordsheet.file.close()
+    else:
+        chordsheet_html = ""
     return render(request, "hashirim_shelanu/viewsong.html", {"song": song, "chordsheet_html": chordsheet_html})
 
 
