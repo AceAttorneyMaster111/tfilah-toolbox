@@ -15,8 +15,8 @@ class PrayerTag(models.Model):
 
 class Prayer(models.Model):
     name = models.CharField(max_length=200)
-    description = models.TextField(blank=True, null=True)
-    tags = models.ManyToManyField(PrayerTag, related_name="prayers")
+    description = models.TextField(blank=True)
+    tags = models.ManyToManyField(PrayerTag, related_name="prayers", blank=True)
 
     def __str__(self):
         return self.name
@@ -43,6 +43,13 @@ class Song(models.Model):
     artist = models.ForeignKey(Artist, on_delete=models.CASCADE)
     release_year = models.PositiveSmallIntegerField(blank=True, null=True)
     tags = models.ManyToManyField(SongTag, related_name="songs", blank=True)
+
+    spotify = models.CharField(max_length=50, blank=True, help_text="Just the ID, for example: 2aSi2nkU99ZaaOg2gB2hd5")
+    apple_music = models.CharField(max_length=30, blank=True,
+                                   help_text="Just the album and song IDs. for example: 1451484697?i=1451484701")
+    youtube = models.CharField(max_length=20, blank=True, help_text="Just the ID, for example: VEJHr0BRh2c")
+
+
 
     def __str__(self):
         return f"{self.title} ({self.artist})"

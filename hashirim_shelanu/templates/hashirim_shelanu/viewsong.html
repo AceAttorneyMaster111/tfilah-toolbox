@@ -28,6 +28,25 @@
             {% endfor %}
         </ul>
     </div>
+    <div id="stream-links">
+        {% if song.spotify %}
+            <div id="spotify">
+                <a href="https://open.spotify.com/track/{{ song.spotify }}">Listen on Spotify</a>
+            </div>
+        {% endif %}
+
+        {% if song.apple_music %}
+            <div id="apple-music">
+                <a href="https://music.apple.com/us/album/{{ song.apple_music }}">Listen on Apple Music</a>
+            </div>
+        {% endif %}
+
+        {% if song.youtube %}
+            <div id="youtube">
+                <a href="https://www.youtube.com/watch?v={{ song.youtube }}">Watch on YouTube</a>
+            </div>
+        {% endif %}
+    </div>
     {% if chordsheet_html %}
         <div id="chordsheet">
             <div id="chordsheet-display">
